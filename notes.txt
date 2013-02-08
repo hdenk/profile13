@@ -1,0 +1,23 @@
+clojure-web-apps on heroku 
+
+https://devcenter.heroku.com/articles/clojure
+
+
+***
+
+The latest release of Luminus is no longer using a custom server.clj wich 
+starts up Jetty using run-jetty. Instead, it now relies on lein-ring, which 
+in turns uses ring-server to create the server.
+
+http://yogthos.net/blog/38-One+Ring+to+rule+them+all
+
+It was recently announced that Noir is being deprecated. The primary reason cited
+is that it simply doesn't add a lot of useful functionality over what's already 
+available in Compojure and makes it difficult to integrate other middleware, such 
+as friend. 
+
+http://yogthos.net/blog/33-Moving+to+Compojure
+
+***
+
+http://thecomputersarewinning.com/post/clojure-heroku-noir-mongo/
