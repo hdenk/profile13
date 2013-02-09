@@ -2,7 +2,7 @@
   (:require [profile.simpledb :as simpledb]
             [profile.crypt :as crypt]))
 
-(defmacro dbg
+#_(defmacro dbg
   "print debug-infos to console"
   [x] 
   `(let 
@@ -24,7 +24,6 @@
       found)))
       
 (defn find-user-by-id [id] 
-  (dbg (str "find-user-by-id" id))
   (reduce (reduce-by-id id) nil (simpledb/keys :user)))
 
 (defn login [credentials]
