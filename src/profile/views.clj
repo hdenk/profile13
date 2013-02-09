@@ -16,13 +16,13 @@
      [x# ~x] 
      (println "dbg:" '~x "=" x#) x#)) 
 
-(declare store-location current-user)
+(declare store-location)
 
 ;;
 ;; security
 ;;
   
-(defmacro secure [pred & body]
+(defmacro secure-if [pred & body]
   `(if (~pred) 
      (do ~@body) 
      (do (store-location) (response/redirect "/login"))))
@@ -107,7 +107,8 @@
 	 [:footer] (h/content footer)) 
 
 (h/defsnippet navigation "profile/templates/navigation.html" [:navigation :> :*]
-  [])
+  []
+  [:span#userid] (h/content (:name (current-user))))
 
 (h/defsnippet footer "profile/templates/footer.html" [:footer]
   [])
@@ -122,6 +123,18 @@
              :style (h/select intro [:style])
 	           :navigation (navigation)
 	           :content (h/select intro [:div#content :> :*])
+	           :footer (footer)})))
+
+;;
+;; kontakt
+;;
+
+(defn kontakt-page [{:as params}]  
+  (let [kontakt (h/html-resource "profile/templates/kontakt.html")] 
+	  (layout {:title (h/select kontakt [:title :> h/text-node])
+             :style (h/select kontakt [:style])
+	           :navigation (navigation)
+	           :content (h/select kontakt [:div#content :> :*])
 	           :footer (footer)})))
 
 ;;
@@ -179,10 +192,11 @@
 
 (defroutes routes
   (GET "/" [] (response/redirect "/intro"))
-  (GET "/intro" [] (secure logged-in? (intro-page {})))
   (GET "/login" [] (login-page))
   (POST "/login" [& credentials] (login credentials)) 
   (POST "/logout" [] (logout))
-  (GET "/admin" [] (secure admin? "admin"))
+  (GET "/intro" [] (secure-if logged-in? (intro-page {})))
+  (GET "/kontakt" [] (secure-if logged-in? (kontakt-page {})))
+  (GET "/admin" [] (secure-if admin? "admin"))
   (GET "/options" [] (str "mode: " (options/get :mode)))
   (GET "/throw" [] (throw (Exception. "Exception was thrown ..."))))
