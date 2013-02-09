@@ -1,7 +1,8 @@
-(ns profile.other-tests
+(ns profile.misc-tests
   (:use [clojure.test :only [deftest is testing]])
-  (:require [bouncer [core :as b] [validators :as v]]))
-
+  (:require [bouncer [core :as b] [validators :as v]]
+            [profile.crypt :as crypt]))
+   
 (v/defvalidatorset credential-validator
   :id (v/required :message "Identifikation darf nicht leer bleiben")
   :password (v/required :message "Passwort darf nicht leer bleiben"))
@@ -17,3 +18,11 @@
       (=
         '[nil {:id "1", :password "test1"}]
         (b/validate {:id "1" :password "test1"} credential-validator)))))
+
+(deftest encryption
+  (testing 
+    "with-crypted" 
+    (is
+      (crypt/compare
+        "test" 
+        (crypt/with-crypted "test")))))
