@@ -1,3 +1,4 @@
+*.swp
 .lein*
 .project
 /target/
