@@ -1,5 +1,6 @@
 (ns profile.models
-  (:require [profile.simpledb :as simpledb]))
+  (:require [profile.simpledb :as simpledb]
+            [profile.crypt :as crypt]))
 
 (defmacro dbg
   "print debug-infos to console"
@@ -8,11 +9,11 @@
      [x# ~x] 
      (println "dbg:" '~x "=" x#) x#)) 
 
-(def dbcontent 
+(def dbcontent
   {:user 
-   {1 {:id "name1@noc.de" :email "name1@noc.de" :password "test1" :name "name1" :comment "comment name1"}
-    2 {:id "name2@noc.de" :email "name2@noc.de" :password "test2" :name "name2" :comment "comment name2"}
-    3 {:id "admin@noc.de" :email "admin@noc.de" :password "secret" :name "admin" :comment "comment admin"}}})
+   {1 {:id "name1@noc.de" :email "name1@noc.de" :name "name1" :comment "comment name1" :password "$2a$12$TGl2FP/k3hLnlhYH.198q.IuqibqE2EHo2pwTjgiys23K4bCVu.Ti"} ; test1
+    2 {:id "name2@noc.de" :email "name2@noc.de" :name "name2" :comment "comment name2" :password "$2a$12$B.Lmz4uCROJRPSAuWugrm.3PErKfFN59FQtRQ6GBO4r2rbp6TbH/2"} ; test2
+    3 {:id "admin@noc.de" :email "admin@noc.de" :name "admin" :comment "comment admin" :password "$2a$12$7qKyln6.X2Spz379RWAA5.Ce7N0/kbBZibtOfdwxyfR3n64ehmonO"}}}) ; secret
 
 (defn- reduce-by-id [id]
   (fn [found key]
@@ -28,5 +29,5 @@
 
 (defn login [credentials]
   (if-let [user (find-user-by-id (:id credentials))]
-    (when (= (:password user) (:password credentials)) ; TODO use encrypted !
-      user)))    
+    (when (crypt/compare (:password credentials) (:password user)) 
+      user)))

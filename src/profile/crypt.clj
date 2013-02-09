@@ -26,3 +26,9 @@
         secret (javax.crypto.spec.SecretKeySpec. (.getBytes sign-key), "HmacSHA1")]
     (.init mac secret)
     (apply str (map (partial format "%02x") (.doFinal mac (.getBytes v))))))
+
+(defmacro with-crypted
+  "Wrap password crypting so that the work factor only needs to
+   get updated in a single place."
+  [password]
+  `(encrypt (gen-salt 12) ~password))
