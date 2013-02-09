@@ -107,34 +107,23 @@
 	 [:footer] (h/content footer)) 
 
 (h/defsnippet navigation "profile/templates/navigation.html" [:navigation :> :*]
-  []
+  [page-id]
+  [(keyword (str "a#" page-id))] (h/add-class "active")
   [:span#userid] (h/content (:name (current-user))))
 
 (h/defsnippet footer "profile/templates/footer.html" [:footer]
   [])
 
 ;;
-;; intro
+;; content-page
 ;;
 
-(defn intro-page [{:as params}]  
-  (let [intro (h/html-resource "profile/templates/intro.html")] 
-	  (layout {:title (h/select intro [:title :> h/text-node])
-             :style (h/select intro [:style])
-	           :navigation (navigation)
-	           :content (h/select intro [:div#content :> :*])
-	           :footer (footer)})))
-
-;;
-;; kontakt
-;;
-
-(defn kontakt-page [{:as params}]  
-  (let [kontakt (h/html-resource "profile/templates/kontakt.html")] 
-	  (layout {:title (h/select kontakt [:title :> h/text-node])
-             :style (h/select kontakt [:style])
-	           :navigation (navigation)
-	           :content (h/select kontakt [:div#content :> :*])
+(defn content-page [{:keys [page-id] :as params}]  
+  (let [content (h/html-resource (str "profile/templates/" page-id ".html"))] 
+	  (layout {:title (h/select content [:title :> h/text-node])
+             :style (h/select content [:style])
+	           :navigation (navigation page-id)
+	           :content (h/select content [:div#content :> :*])
 	           :footer (footer)})))
 
 ;;
@@ -171,7 +160,7 @@
     (if user
       (do
         (save-user-info-in-session user)
-        (redirect-back-or-default "/intro"))
+        (redirect-back-or-default "/content/intro"))
       (let [l-credentials (if (nil? v-result) 
                             (assoc-in v-credentials [:bouncer.core/errors :login] '("Leider keine gültige Anmeldung"))
                             v-credentials)]
@@ -191,12 +180,12 @@
 ;;
 
 (defroutes routes
-  (GET "/" [] (response/redirect "/intro"))
+  (GET "/" [] (response/redirect "/content/intro"))
   (GET "/login" [] (login-page))
   (POST "/login" [& credentials] (login credentials)) 
   (POST "/logout" [] (logout))
-  (GET "/intro" [] (secure-if logged-in? (intro-page {})))
-  (GET "/kontakt" [] (secure-if logged-in? (kontakt-page {})))
+  (GET "/content/:page-id" [page-id] (secure-if logged-in? (content-page {:page-id page-id})))
+  ;(GET "/content/:" [] (secure-if logged-in? (kontakt-page {})))
   (GET "/admin" [] (secure-if admin? "admin"))
   (GET "/options" [] (str "mode: " (options/get :mode)))
   (GET "/throw" [] (throw (Exception. "Exception was thrown ..."))))
