@@ -1,5 +1,6 @@
 *.swp
-.lein*
+.lein-*
+.env
 .project
 /target/
 /_attic_/
