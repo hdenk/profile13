@@ -1,3 +1,21 @@
+10.02.2013
+
+***
+
+hdenk@HP-620:~/Workspaces/working/profile13$ heroku create
+Creating stormy-shore-5403... done, stack is cedar
+http://stormy-shore-5403.herokuapp.com/ | git@heroku.com:stormy-shore-5403.git
+Git remote heroku added
+
+
+***
+
+Warum wird das: ???
+
+Retrieving org/clojure/clojure/1.5.0-RC14/clojure-1.5.0-RC14.pom from central
+
+in project.clj steht [org.clojure/clojure "1.4.0"]
+
 06-02-2013
 
 Ein Fall für AJAX ? 
