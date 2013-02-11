@@ -101,9 +101,24 @@
 (h/deftemplate layout "profile/templates/layout.html"
   [{:keys [title style navigation content footer]}]
 	 [:title] (h/content title)
+
 	 [:style#inline] (h/substitute style)
-	 [:navigation] (h/substitute navigation)
+
+     ; convert relative paths for css-links to absolute so that they work  
+     ; for any page, whatever its URL path is.
+     [[:link (h/attr= :rel "stylesheet")]]
+       (fn [node]
+         ((h/set-attr :href (str "/" (get-in node [:attrs :href]))) node))
+
+     ; ditto for js-links
+     [[:script (h/attr= :type "text/javascript")]]
+       (fn [node]
+         ((h/set-attr :src (str "/" (get-in node [:attrs :src]))) node))
+
+	 [:navigation] (when navigation (h/substitute navigation))
+
 	 [:content] (h/substitute content)
+
 	 [:footer] (h/content footer)) 
 
 (h/defsnippet navigation "profile/templates/navigation.html" [:navigation :> :*]
