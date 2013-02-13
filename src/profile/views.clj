@@ -79,18 +79,6 @@
       ((h/set-attr :value (get model (keyword field-name))) node))))
 
 ;;
-;; error
-;;
-
-(defn error [{:keys [message]}]
-    (let [error (h/html-resource "profile/templates/error.html")] 
-      (h/at error 
-           [:message] (h/content message))))
-
-(defn response-404 []
-  (error {:message "The page you requested could not be found"}))
-
-;;
 ;; layout
 ;;
 
@@ -191,6 +179,27 @@
   (response/redirect "/login"))
 
 ;;
+;; error
+;;
+
+(defn error [{:keys [message]}]
+    (let [error (h/html-resource "profile/templates/error.html")] 
+      (h/at error 
+           [:message] (h/content message))))
+
+(defn error-404 []
+  (error 
+    {:message 
+    "Die angeforderte Seite konnte nicht gefunden werden"}))
+
+(defn error-500 []
+  (error 
+    {:message 
+    "Leider ist ein Problem aufgetreten. Bitte versuchen sie es erneut. Falls das 
+    Problem dauerhaft besteht, kontaktieren sie helmut.denk@gmx.de. Sorry und 
+    vielen Dank für ihr Verständnis."}))
+
+;;
 ;; routes
 ;;
 
@@ -200,7 +209,6 @@
   (POST "/login" [& credentials] (login credentials)) 
   (POST "/logout" [] (logout))
   (GET "/content/:page-id" [page-id] (secure-if logged-in? (content-page {:page-id page-id})))
-  ;(GET "/content/:" [] (secure-if logged-in? (kontakt-page {})))
   (GET "/admin" [] (secure-if admin? "admin"))
   (GET "/options" [] (str "mode: " (options/get :mode)))
   (GET "/throw" [] (throw (Exception. "Exception was thrown ..."))))
