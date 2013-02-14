@@ -126,7 +126,7 @@
 	  (layout {:title (h/select content [:title :> h/text-node])
              :style (h/select content [:style])
 	           :navigation (navigation page-id)
-	           :content (h/select content [:div#content :> :*])
+	           :content (h/select content [:div.content :> :*])
 	           :footer (footer)})))
 
 ;;
