@@ -6,8 +6,7 @@
 (em/defsnippet zeugnis-gao "/templates/zeugnis-gao.html" ["div.content > *"] [])
 (em/defsnippet zeugnis-mbb "/templates/zeugnis-mbb.html" ["div.content > *"] []) 
 (em/defsnippet zeugnis-bmw "/templates/zeugnis-bmw.html" ["div.content > *"] []) 
-(em/defsnippet zeugnis-fhnoten "/templates/zeugnis-fhnoten.html" ["div.content > *"] []) 
-(em/defsnippet zeugnis-vordiplom "/templates/zeugnis-vordiplom.html" ["div.content > *"] []) 
+(em/defsnippet zeugnis-fh "/templates/zeugnis-fh.html" ["div.content > *"] []) 
 (em/defsnippet zeugnis-jtg "/templates/zeugnis-jtg.html" ["div.content > *"] []) 
 
 (em/at js/document
@@ -27,12 +26,8 @@
                                     ["#zeugnis-info"] (em/content (zeugnis-bmw)))))             
 
 (em/at js/document
-  ["#fhnoten"] (em/listen :click #(em/at js/document 
-                                    ["#zeugnis-info"] (em/content (zeugnis-fhnoten)))))             
-
-(em/at js/document
-  ["#vordiplom"] (em/listen :click #(em/at js/document 
-                                    ["#zeugnis-info"] (em/content (zeugnis-vordiplom)))))             
+  ["#fh"] (em/listen :click #(em/at js/document 
+                                    ["#zeugnis-info"] (em/content (zeugnis-fh)))))             
 
 (em/at js/document
   ["#jtg"] (em/listen :click #(em/at js/document 
