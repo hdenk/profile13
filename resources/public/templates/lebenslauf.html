@@ -9,7 +9,20 @@
         padding-top: 60px;
         padding-bottom: 40px;
       }
-    </style>
+	table.activity {
+		margin-bottom: 15px;
+	}
+
+	table.activity td.period {
+	    vertical-align: top;
+		white-space: nowrap;
+		padding: 3px;
+	}
+
+	table.activity td.content {
+		padding: 3px;
+	}    
+	</style>
   </head>
   <body>
     <div class="container">
@@ -18,48 +31,47 @@
           <h1>Lebenslauf</h1>
         </div>
         <div class="row">
-          <h2>Pers&ouml;nliche Angaben</h2>
+        <div class="span8">
+          <h3>Pers&ouml;nliche Angaben</h3>
           <table class="simplemap">
             <tr><td class="key">Name:</td><td class="value">Helmut Denk</td></tr>
             <tr><td class="key">Geburtsdatum:</td><td class="value">04.07.1964 in Gangkofen</td></tr>
             <tr><td class="key">Familienstand:</td><td class="value">ledig, keine Kinder</td></tr>
           </table>
 
-          <h2>Schule</h2>
+          <h3>Beruf</h3>
           <table class="activity">
-            <tr><td class="period">1970 - 1974:</td><td class="content">Grundschule Dirnaich</td></tr>
-            <tr><td class="period">1974 - 1983:</td><td class="content">Johannes Turmair Gymnasium Straubing</td></tr>
-            <tr><td class="period">1983:</td><td class="content">Abitur</td></tr>
+            <tr><td class="period">2002 - 2010:</td><td  class="content">Angestellter der Zeppelin Baumaschinen GmbH. T&auml;tigkeit als Softwareentwickler.
+                Entwicklung von Web-Anwendungen (Spring), Etablierung einer Portalsoftware (Liferay), Etablierung von automatisierten Build-
+                und Testverfahren, Durchf&uuml;hren von Softwaretests.</td></tr>
+            <tr><td class="period">1995 - 2002:</td><td  class="content">Freie Mitarbeit in Projekten von: Deutsche Post AG, Fraunhofer 
+                Gesellschaft, Friendlyway AG. Webbasiertes Kennzahlensystem, Surfstation, Kartenzahlungssystem.</td></tr>
+            <tr><td class="period">1989 - 1995:</td><td class="content">Angestellter der Gesellschaft f&uuml;r Automation und Organisation
+                GAO T&auml;tigkeit als Softwareentwickler. Wartung und Entwicklung von Software zur Steuerung von Banknoten-Bearbeitungs-Maschinen</td></tr>
           </table>
 
-          <h2>Wehrdienst</h2>
-          <table class="activity">
-            <tr><td class="period">1983 - 1984:</td><td class="content">Wehrdienst</td></tr>
-          </table>
-
-          <h2>Studium/Praktika</h2>
+          <h3>Studium/Praktika</h3>
           <table class="activity">
             <tr><td class="period">1984 - 1988:</td><td class="content">Fachhochschule Regensburg Studiengang technische Informatik</td></tr>
             <tr><td class="period">1985:</td><td  class="content">Vordiplom</td></tr>
             <tr><td class="period">1985:</td><td  class="content">1. praktisches Semester bei BMW AG Dingolfing</td></tr>
             <tr><td class="period">1987:</td><td  class="content">2. praktisches Semester bei MBB Ottobrunn</td></tr>
-            <tr><td class="period">1988:</td><td  class="content">Diplom fehlt (*)</td></tr>
+            <tr><td class="period">1988:</td><td  class="content">ohne Abschluß</td></tr>
+          </table>
+          
+          <h3>Wehrdienst</h3>
+          <table class="activity">
+            <tr><td class="period">1983 - 1984:</td><td class="content">Grundwehrdienst</td></tr>
           </table>
 
-          <h2>Beruf</h2>
+          <h3>Schule</h3>
           <table class="activity">
-            <tr><td class="period">1989 - 1995:</td><td class="content">Angestellter der Gesellschaft f&uuml;r Automation und Organisation
-                GAO T&auml;tigkeit als Softwareentwickler. Wartung und Entwicklung von Software zur Steuerung von Banknoten-Bearbeitungs-Maschinen</td></tr>
-            <tr><td class="period">1995 - 2002:</td><td  class="content">Freie Mitarbeit in Projekten von: Deutsche Post AG, Fraunhofer 
-                Gesellschaft, Friendlyway AG. Webbasiertes Kennzahlensystem, Surfstation, Kartenzahlungssystem.</td></tr>
-            <tr><td class="period">2002 - 2010:</td><td  class="content">Angestellter der Zeppelin Baumaschinen GmbH. T&auml;tigkeit als Softwareentwickler.
-                Entwicklung von Web-Anwendungen (Spring), Etablierung einer Portalsoftware (Liferay), Etablierung von automatisierten Build-
-                und Testverfahren, Durchf&uuml;hren von Softwaretests.</td></tr>
+            <tr><td class="period">1970 - 1974:</td><td class="content">Grundschule Dirnaich</td></tr>
+            <tr><td class="period">1974 - 1983:</td><td class="content">Johannes Turmair Gymnasium Straubing</td></tr>
+            <tr><td class="period">1983:</td><td class="content">Abitur</td></tr>
           </table>
           </p>
-
-          <p>(*) Das Studium wurde auf Grund von Krankheit nicht beeendet.</p>
-
+        </div>
         </div>
       </div> <!-- /content -->
     </div> <!-- /container -->
