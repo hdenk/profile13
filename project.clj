@@ -24,7 +24,7 @@
    ;[ring/ring-jetty-adapter "1.1.8"]
    [compojure "1.1.3"]
    [enlive "1.1.1"]
-   [enfocus "1.0.0-SNAPSHOT"]
+   [enfocus "1.0.0-RC1"]
    [bouncer "0.2.3-SNAPSHOT"]
    [org.mindrot/jbcrypt "0.3m"]]
 
