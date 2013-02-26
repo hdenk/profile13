@@ -22,7 +22,7 @@
 ;; security
 ;;
   
-(defmacro secure-if [pred & body]
+(defmacro grant-access-if [pred & body]
   `(if (~pred) 
      (do ~@body) 
      (do (store-location) (response/redirect "/login"))))
@@ -208,7 +208,7 @@
   (GET "/login" [] (login-page))
   (POST "/login" [& credentials] (login credentials)) 
   (POST "/logout" [] (logout))
-  (GET "/content/:page-id" [page-id] (secure-if logged-in? (content-page {:page-id page-id})))
-  (GET "/admin" [] (secure-if admin? "admin"))
+  (GET "/content/:page-id" [page-id] (grant-access-if logged-in? (content-page {:page-id page-id})))
+  (GET "/admin" [] (grant-access-if admin? "admin"))
   (GET "/options" [] (str "mode: " (options/get :mode)))
   (GET "/throw" [] (throw (Exception. "Exception was thrown ..."))))
